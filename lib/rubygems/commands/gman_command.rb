@@ -15,6 +15,7 @@ class Gem::Commands::GmanCommand < Gem::Command
 
   def document(gem)
     RDoc::RDoc.new.document [
+      "-q",
       "-f", "mdoc",
       "--section", "#{mandb_section(gem)}",
       "-o", "#{output_directory}",
