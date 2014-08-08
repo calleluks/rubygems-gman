@@ -18,7 +18,7 @@ class Gem::Commands::GmanCommand < Gem::Command
       "-f", "mdoc",
       "--section", "#{mandb_section(gem)}",
       "-o", "#{output_directory}",
-      gem.full_gem_path,
+      *Dir.glob(gem.lib_dirs_glob),
     ]
   end
 
