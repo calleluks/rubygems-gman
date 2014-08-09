@@ -8,15 +8,11 @@ class Gem::Commands::GmanCommand < Gem::Command
   end
 
   def execute
-    Gem::Specification.each do |gem|
-      say "Generating man pages for #{gem.full_name}..."
-      document(gem)
-    end
+    Gem::Specification.each { |gem| document(gem) }
   end
 
-  private
-
   def document(gem)
+    say "Generating man pages for #{gem.full_name}..."
     RDoc::RDoc.new.document [
       "-q",
       "-f", "mdoc",
@@ -27,6 +23,8 @@ class Gem::Commands::GmanCommand < Gem::Command
   rescue => exception
     say "Failed to generate man pages for #{gem.full_name} (#{exception})."
   end
+
+  private
 
   def output_directory
     File.join(Dir.home, ".man")
