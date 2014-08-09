@@ -8,7 +8,11 @@ class Gem::Commands::GmanCommand < Gem::Command
   end
 
   def execute
-    Gem::Specification.each { |gem| document(gem) }
+    if name = get_one_optional_argument
+      document_gem_with_name name
+    else
+      document_all_gems
+    end
   end
 
   def document(gem)
@@ -25,6 +29,14 @@ class Gem::Commands::GmanCommand < Gem::Command
   end
 
   private
+
+  def document_gem_with_name(name)
+    document Gem::Specification.find_by_name(name)
+  end
+
+  def document_all_gems
+    Gem::Specification.each { |gem| document gem }
+  end
 
   def output_directory
     File.join(Dir.home, ".man")
