@@ -8,7 +8,10 @@ class Gem::Commands::GmanCommand < Gem::Command
   end
 
   def execute
-    Gem::Specification.each { |gem| document(gem) }
+    Gem::Specification.each do |gem|
+      say "Generating man pages for #{gem.full_name}..."
+      document(gem)
+    end
   end
 
   private
@@ -21,6 +24,8 @@ class Gem::Commands::GmanCommand < Gem::Command
       "-o", "#{output_directory}",
       *Dir.glob(gem.lib_dirs_glob),
     ]
+  rescue => exception
+    say "Failed to generate man pages for #{gem.full_name} (#{exception})."
   end
 
   def output_directory
