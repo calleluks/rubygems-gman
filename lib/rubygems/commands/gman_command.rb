@@ -7,6 +7,14 @@ class Gem::Commands::GmanCommand < Gem::Command
     super "gman", "Generate and install man pages for gems"
   end
 
+  def usage
+    "gem gman [GEMNAME]"
+  end
+
+  def arguments
+    "GEMNAME       name of gem to generate man pages for"
+  end
+
   def execute
     if name = get_one_optional_argument
       document_gem_with_name name
