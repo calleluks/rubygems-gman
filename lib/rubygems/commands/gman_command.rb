@@ -32,6 +32,8 @@ class Gem::Commands::GmanCommand < Gem::Command
 
   def document_gem_with_name(name)
     document Gem::Specification.find_by_name(name)
+  rescue Gem::LoadError
+    say "Could not find a gem with the name \"#{name}\"."
   end
 
   def document_all_gems
