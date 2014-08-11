@@ -53,6 +53,6 @@ class Gem::Commands::GmanCommand < Gem::Command
   end
 
   def mandb_section(gem)
-    "3-rubygems-#{gem.name}-#{gem.version.to_s.gsub(".", "-")}"
+    "3-rubygems-#{gem.name}-#{gem.version.to_s}"
   end
 end
