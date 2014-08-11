@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "rubygems-gman"
-  spec.version       = "0.0.1"
+  spec.version       = "0.0.2"
   spec.authors       = ["Calle Erlandsson"]
   spec.email         = ["calle@thoughtbot.com", "hello@thoughtbot.com"]
   spec.summary       = "Generate and install man pages for installed gems."
