@@ -24,14 +24,14 @@ class Gem::Commands::GmanCommand < Gem::Command
   end
 
   def document(gem)
-    say "Generating man pages for #{gem.full_name}..."
-    RDoc::RDoc.new.document [
-      "-q",
-      "-f", "mdoc",
-      "--section", "#{mandb_section(gem)}",
-      "-o", "#{output_directory}",
-      *Dir.glob(gem.lib_dirs_glob),
-    ]
+    inside_gem_directory gem do
+      if files(gem).empty?
+        say "No source files found for #{gem.full_name}."
+      else
+        say "Generating man pages for #{gem.full_name}..."
+        run_rdoc(gem)
+      end
+    end
   rescue => exception
     say "Failed to generate man pages for #{gem.full_name} (#{exception})."
   end
@@ -48,11 +48,31 @@ class Gem::Commands::GmanCommand < Gem::Command
     Gem::Specification.each { |gem| document gem }
   end
 
-  def output_directory
-    File.join(Dir.home, ".man")
+  def inside_gem_directory(gem, &block)
+    Dir.chdir gem.full_gem_path, &block
+  end
+
+  def files(gem)
+    (gem.source_paths + gem.extra_rdoc_files).select do |path|
+      File.exists?(path)
+    end
+  end
+
+  def run_rdoc(gem)
+    RDoc::RDoc.new.document [
+      "-q",
+      "-f", "mdoc",
+      "--section", "#{mandb_section(gem)}",
+      "-o", "#{output_directory}",
+      *files(gem),
+    ]
   end
 
   def mandb_section(gem)
     "3-rubygems-#{gem.name}-#{gem.version.to_s}"
+  end
+
+  def output_directory
+    File.join(Dir.home, ".man")
   end
 end
