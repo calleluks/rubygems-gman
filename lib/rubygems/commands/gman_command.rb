@@ -64,6 +64,7 @@ class Gem::Commands::GmanCommand < Gem::Command
       "-f", "mdoc",
       "--section", "#{mandb_section(gem)}",
       "-o", "#{output_directory}",
+      "--force-output",
       *files(gem),
     ]
   end
