@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "rubygems-gman"
-  spec.version       = "0.0.3"
+  spec.version       = "0.0.4"
   spec.authors       = ["Calle Erlandsson"]
   spec.email         = ["calle@thoughtbot.com", "hello@thoughtbot.com"]
   spec.summary       = "Generate and install man pages for installed gems."
