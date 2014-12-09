@@ -3,6 +3,13 @@ rubygems-gman
 
 Generate and install man pages for installed gems.
 
+**Please note**: `rubygems-gman` is **experimental software**. It probably has
+some [issues](https://github.com/thoughtbot/rubygems-gman/issues). If you find
+one, please report it through the issue tracker. If you'd like to help develop
+`rubygems-gman`, please see the instructions in
+[`CONTRIBUTING.md`](https://github.com/thoughtbot/rubygems-gman/blob/master/CONTRIBUTING.md).
+Pull requests are very welcome.
+
 Installation
 ------------
 
